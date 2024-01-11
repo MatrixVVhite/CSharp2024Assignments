@@ -26,6 +26,8 @@
 		protected virtual void Defend(Unit other) => ApplyDamage(other.Damage);
 
 		protected void ApplyDamage(int damage) => CurrentHP -= damage;
+
+		public void Heal(int amount) => CurrentHP += amount;
 	}
 
 	public enum Race

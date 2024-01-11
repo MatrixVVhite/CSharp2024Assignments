@@ -13,6 +13,10 @@
 			_surviveAtHp = surviveAtHp;
 		}
 
+		/// <summary>
+		/// Can survive fatal blows at "_surviveAtHp" HP when HP percentage is above "_surviveHpThreshold".
+		/// </summary>
+		/// <param name="other"></param>
 		protected override void Defend(Unit other)
 		{
 			int incomingDamage = other.Damage;
