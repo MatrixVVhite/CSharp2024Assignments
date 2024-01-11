@@ -31,7 +31,7 @@
 	public enum Race
 	{
 		Bio,
-		Machine,
+		Cyber,
 		Void
 	}
 }
