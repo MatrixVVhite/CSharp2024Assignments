@@ -2,18 +2,22 @@
 {
 	public abstract class Marauder : Unit
 	{
-		private const float SURVIVE_HP_THRESHOLD = .1f;
-		private const int SURVIVE_AT_HP = 1;
+		private float _surviveHpThreshold;
+		private int _surviveAtHp;
 
-		private bool CanSurvive => CurrentHP > SURVIVE_AT_HP && this.GetHPPercentage() >= SURVIVE_HP_THRESHOLD;
+		private bool CanSurvive => CurrentHP > _surviveAtHp && this.GetHPPercentage() >= _surviveHpThreshold;
 
-		public Marauder(int hp, int damage, Race race) : base(hp, damage, race) { }
+		public Marauder(int hp, int damage, Race race, float surviveHpThreshold = .1f, int surviveAtHp = 1) : base(hp, damage, race)
+		{
+			_surviveHpThreshold = surviveHpThreshold;
+			_surviveAtHp = surviveAtHp;
+		}
 
 		protected override void Defend(Unit other)
 		{
 			int incomingDamage = other.Damage;
 			if (CanSurvive)
-				incomingDamage = Utility.ClampMax(incomingDamage, CurrentHP - SURVIVE_AT_HP);
+				incomingDamage = Utility.ClampMax(incomingDamage, CurrentHP - _surviveAtHp);
 			ApplyDamage(incomingDamage);
 		}
 	}
