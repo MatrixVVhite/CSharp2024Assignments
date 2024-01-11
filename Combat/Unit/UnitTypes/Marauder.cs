@@ -9,7 +9,7 @@
 
 		public Marauder(int hp, int damage, Race race) : base(hp, damage, race) { }
 
-		public override void Defend(Unit other)
+		protected override void Defend(Unit other)
 		{
 			int incomingDamage = other.Damage;
 			if (CanSurvive)

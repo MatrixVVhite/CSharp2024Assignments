@@ -23,7 +23,7 @@
 
 		public virtual void Attack(Unit other) => other.Defend(this);
 
-		public virtual void Defend(Unit other) => ApplyDamage(other.Damage);
+		protected virtual void Defend(Unit other) => ApplyDamage(other.Damage);
 
 		protected void ApplyDamage(int damage) => CurrentHP -= damage;
 	}
