@@ -1,14 +1,14 @@
 ﻿namespace BloodyShapes.Shapes
 {
-	class Circle : Shape
+	sealed class Circle : Shape
 	{
 		private const float PI = (float)Math.PI;
 
-		public float Radius { get; protected set; }
+		public float Radius { get; private set; }
 
 		public float Diameter => Radius * 2;
 
-		public Circle(float radius = 1, float posX = 0, float posY = 0) : base(radius * 2, radius * 2, posX, posY)
+		public Circle(float radius = .5f, float posX = 0, float posY = 0) : base(radius * 2, radius * 2, posX, posY)
 		{
 			Radius = radius;
 		}
