@@ -14,5 +14,13 @@
 		{
 			return $"Triangle of dimensions {Base}x{Height} centered on ({PositionX}, {PositionY})";
 		}
+
+		public override bool Equals(object? obj)
+		{
+			if (obj is Triangle other)
+				return Base == other.Base & Height == other.Height & PositionX == other.PositionX & PositionY == other.PositionY;
+			else
+				return false;
+		}
 	}
 }

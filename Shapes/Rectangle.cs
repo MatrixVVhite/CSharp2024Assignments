@@ -9,5 +9,13 @@
 		public override float Perimeter() => (Width * 2) + (Height * 2);
 
 		public override string ToString() => $"Rectangle of dimensions {Width}x{Height} centered on ({PositionX}, {PositionY})";
+
+		public override bool Equals(object? obj)
+		{
+			if (obj is Rectangle other)
+				return Width == other.Width & Height == other.Height & PositionX == other.PositionX & PositionY == other.PositionY;
+			else
+				return false;
+		}
 	}
 }

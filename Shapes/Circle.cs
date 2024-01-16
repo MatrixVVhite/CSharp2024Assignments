@@ -18,5 +18,13 @@
 		public override float Perimeter() => Diameter * PI;
 
 		public override string ToString() => $"Circle of radius {Radius} centered on ({PositionX}, {PositionY})";
+
+		public override bool Equals(object? obj)
+		{
+			if (obj is Circle other)
+				return Radius == other.Radius & PositionX == other.PositionX & PositionY == other.PositionY;
+			else
+				return false;
+		}
 	}
 }

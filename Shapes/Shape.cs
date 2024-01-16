@@ -1,4 +1,6 @@
-﻿namespace BloodyShapes.Shapes
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace BloodyShapes.Shapes
 {
 	abstract class Shape
 	{
@@ -20,5 +22,13 @@
 		public abstract float Perimeter();
 
 		public virtual void Draw() => Console.WriteLine(this);
+
+		public override bool Equals(object? obj)
+		{
+			if (obj is Shape other)
+				return Width == other.Width & Height == other.Height & PositionX == other.PositionX & PositionY == other.PositionY;
+			else
+				return false;
+		}
 	}
 }
