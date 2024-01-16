@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace BloodyShapes.Shapes
+﻿namespace BloodyShapes.Shapes
 {
 	abstract class Shape
 	{
@@ -8,6 +6,10 @@ namespace BloodyShapes.Shapes
 		public float PositionY { get; protected set; }
 		public float Width { get; protected set; }
 		public float Height { get; protected set; }
+		public virtual float BottomX => PositionX - (Width*.5f);
+		public virtual float TopX => PositionX + (Width * .5f);
+		public virtual float BottomY => PositionY - (Height * .5f);
+		public virtual float TopY => PositionY + (Height * .5f);
 
 		protected Shape(float width = 1, float height = 1, float posX = 0, float posY = 0)
 		{
