@@ -32,5 +32,14 @@
 			else
 				return false;
 		}
+
+		public override int GetHashCode()
+		{
+			short widthHash = (short)Width.GetHashCode();
+			short heightHash = (short)Height.GetHashCode();
+			short posXHash = (short)PositionX.GetHashCode();
+			short posYHash = (short)PositionY.GetHashCode();
+			return ((posXHash ^ widthHash) << 16) + (posYHash ^ heightHash);
+		}
 	}
 }

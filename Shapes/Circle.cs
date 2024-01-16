@@ -26,5 +26,13 @@
 			else
 				return false;
 		}
+
+		public override int GetHashCode()
+		{
+			int radiusHash = Radius.GetHashCode();
+			short posXHash = (short)PositionX.GetHashCode();
+			short posYHash = (short)PositionY.GetHashCode();
+			return ((posXHash << 16) + posYHash) ^ radiusHash;
+		}
 	}
 }
