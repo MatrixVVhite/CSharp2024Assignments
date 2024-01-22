@@ -4,26 +4,40 @@
 	{
 		private int _maxHp;
 		private int _currentHp;
-		private int _damage;
+		private Dice _damage;
+		private Dice _hit;
+		private Dice _avoid;
+		private int _carryingCapacity;
+		private WeatherEffect _weatherEffect;
 		private Race _race;
 
 		public int MaxHP { get => _maxHp; protected set => _maxHp = Utility.ClampMin(value, 1); }
 		public int CurrentHP { get => _currentHp; protected set => _currentHp = Utility.ClampRange(value, 0, _maxHp); }
-		public int Damage { get => _damage; protected set => _damage = Utility.ClampMin(value, 0); }
+		public Dice Damage { get => _damage; protected set => _damage = value; }
+		public Dice Hit { get => _hit; protected set => _hit = value; }
+		public Dice Avoid { get => _avoid; protected set => _avoid = value; }
+		public int CarryingCapacity { get => _carryingCapacity; protected set => _carryingCapacity = value; }
 		public bool IsDead => CurrentHP <= 0;
+		public WeatherEffect WeatherEffect { get => _weatherEffect; protected set => _weatherEffect = value; }
 		public Race Race => _race;
 
-		public Unit(int hp, int damage, Race race)
+		public Unit(int hp, Dice damage, Race race, int carryingCapacity, WeatherEffect weatherEffect = WeatherEffect.None)
 		{
 			MaxHP = hp;
 			CurrentHP = hp;
 			Damage = damage;
 			_race = race;
+			CarryingCapacity = carryingCapacity;
+			WeatherEffect = weatherEffect;
 		}
 
-		public virtual void Attack(Unit other) => other.Defend(this);
+		public virtual void Attack(Unit other)
+		{
+			if (Hit.Roll() > other.Avoid.Roll())
+				other.Defend(this);
+		}
 
-		protected virtual void Defend(Unit other) => ApplyDamage(other.Damage);
+		protected virtual void Defend(Unit other) => ApplyDamage(other.Damage.Roll());
 
 		protected void ApplyDamage(int damage) => CurrentHP -= damage;
 
@@ -35,5 +49,14 @@
 		Bio,
 		Cyber,
 		Void
+	}
+
+	public enum WeatherEffect
+	{
+		None,
+		Sandstorm,
+		Rain,
+		AcidRain,
+		Miasma
 	}
 }
