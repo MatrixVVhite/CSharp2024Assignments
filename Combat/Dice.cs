@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace Berzerkers.Combat
+﻿namespace Berzerkers.Combat
 {
 	public readonly struct Dice : IEquatable<Dice>
 	{
@@ -27,10 +25,7 @@ namespace Berzerkers.Combat
 
 		public override readonly string ToString() => $"{scalar}d{baseDie}{(modifier>0?"": '+')}{modifier}";
 
-		public override bool Equals(object? obj)
-		{
-			return obj is Dice dice && Equals(dice);
-		}
+		public override bool Equals(object? obj) => obj is Dice dice && Equals(dice);
 
 		public bool Equals(Dice other)
 		{
@@ -39,7 +34,7 @@ namespace Berzerkers.Combat
 				   modifier == other.modifier;
 		}
 
-		public override readonly int GetHashCode() => (int)scalar << 24 + (int)baseDie << 16 + modifier;
+		public override readonly int GetHashCode() => (scalar, baseDie, modifier).GetHashCode();
 
 		public static bool operator ==(Dice left, Dice right) => left.Equals(right);
 
