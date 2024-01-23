@@ -21,11 +21,13 @@
 		public WeatherEffect WeatherEffect { get => _weatherEffect; protected set => _weatherEffect = value; }
 		public Race Race => _race;
 
-		public Unit(int hp, Dice damage, Race race, int carryingCapacity, WeatherEffect weatherEffect = WeatherEffect.None)
+		public Unit(int hp, Dice damage, Race race, int carryingCapacity, Dice hit = new(), Dice avoid = new(), WeatherEffect weatherEffect = WeatherEffect.None)
 		{
 			MaxHP = hp;
 			CurrentHP = hp;
 			Damage = damage;
+			Hit = hit;
+			Avoid = avoid;
 			_race = race;
 			CarryingCapacity = carryingCapacity;
 			WeatherEffect = weatherEffect;
