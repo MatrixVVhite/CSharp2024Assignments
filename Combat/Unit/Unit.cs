@@ -8,7 +8,6 @@
 		private Dice _hit;
 		private Dice _avoid;
 		private int _carryingCapacity;
-		private WeatherEffect _weatherEffect;
 		private Race _race;
 
 		public int MaxHP { get => _maxHp; protected set => _maxHp = Utility.ClampMin(value, 1); }
@@ -18,10 +17,9 @@
 		public Dice Avoid { get => _avoid; protected set => _avoid = value; }
 		public int CarryingCapacity { get => _carryingCapacity; protected set => _carryingCapacity = value; }
 		public bool IsDead => CurrentHP <= 0;
-		public WeatherEffect WeatherEffect { get => _weatherEffect; protected set => _weatherEffect = value; }
 		public Race Race => _race;
 
-		public Unit(int hp, Dice damage, Race race, int carryingCapacity, Dice hit = new(), Dice avoid = new(), WeatherEffect weatherEffect = WeatherEffect.None)
+		public Unit(int hp, Dice damage, Race race, int carryingCapacity, Dice hit = new(), Dice avoid = new())
 		{
 			MaxHP = hp;
 			CurrentHP = hp;
@@ -30,7 +28,6 @@
 			Avoid = avoid;
 			_race = race;
 			CarryingCapacity = carryingCapacity;
-			WeatherEffect = weatherEffect;
 		}
 
 		public virtual void Attack(Unit other)
@@ -43,6 +40,8 @@
 
 		protected void ApplyDamage(int damage) => CurrentHP -= damage;
 
+		public abstract void ApplyWeatherEffect(WeatherEffect weatherEffect);
+
 		public void Heal(int amount) => CurrentHP += amount;
 	}
 
@@ -51,14 +50,5 @@
 		Bio,
 		Cyber,
 		Void
-	}
-
-	public enum WeatherEffect
-	{
-		None,
-		Sandstorm,
-		Rain,
-		AcidRain,
-		Miasma
 	}
 }
