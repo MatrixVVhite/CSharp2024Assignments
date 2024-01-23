@@ -2,7 +2,7 @@
 
 namespace Berzerkers.Combat
 {
-	public readonly struct Dice
+	public readonly struct Dice : IEquatable<Dice>
 	{
 		public readonly byte scalar;
 		public readonly byte baseDie;
@@ -27,12 +27,22 @@ namespace Berzerkers.Combat
 
 		public override readonly string ToString() => $"{scalar}d{baseDie}{(modifier>0?"": '+')}{modifier}";
 
-		public override readonly bool Equals([NotNullWhen(true)] object? obj)
+		public override bool Equals(object? obj)
 		{
-			Dice other = (Dice)obj;
-			return scalar == other.scalar & baseDie == other.baseDie & modifier == other.modifier;
+			return obj is Dice dice && Equals(dice);
+		}
+
+		public bool Equals(Dice other)
+		{
+			return scalar == other.scalar &&
+				   baseDie == other.baseDie &&
+				   modifier == other.modifier;
 		}
 
 		public override readonly int GetHashCode() => (int)scalar << 24 + (int)baseDie << 16 + modifier;
+
+		public static bool operator ==(Dice left, Dice right) => left.Equals(right);
+
+		public static bool operator !=(Dice left, Dice right) => !(left == right);
 	}
 }
