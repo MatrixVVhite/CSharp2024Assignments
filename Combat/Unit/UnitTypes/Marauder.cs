@@ -7,7 +7,7 @@
 
 		private bool CanSurvive => CurrentHP > _surviveAtHp && this.GetHPPercentage() >= _surviveHpThreshold;
 
-		public Marauder(int hp, int damage, Race race, float surviveHpThreshold = .1f, int surviveAtHp = 1) : base(hp, damage, race)
+		public Marauder(int hp, Dice damage, Race race, int carryingCapacity = 8, float surviveHpThreshold = .1f, int surviveAtHp = 1) : base(hp, damage, race, carryingCapacity)
 		{
 			_surviveHpThreshold = surviveHpThreshold;
 			_surviveAtHp = surviveAtHp;
@@ -19,7 +19,7 @@
 		/// <param name="other"></param>
 		protected override void Defend(Unit other)
 		{
-			int incomingDamage = other.Damage;
+			int incomingDamage = other.Damage.Roll();
 			if (CanSurvive)
 				incomingDamage = Utility.ClampMax(incomingDamage, CurrentHP - _surviveAtHp);
 			ApplyDamage(incomingDamage);

@@ -2,7 +2,7 @@
 {
 	public abstract class Bruiser : Unit
 	{
-		public Bruiser(int hp, int damage, Race race) : base(hp, damage, race) { }
+		public Bruiser(int hp, Dice damage, Race race, int carryingCapacity = 5) : base(hp, damage, race, carryingCapacity) { }
 
 		/// <summary>
 		/// If HP is higher than target's HP when calling this, attacks twice.
