@@ -37,7 +37,8 @@ namespace Berzerkers.Combat
 			while (TeamsLeft > 1)
 			{
 				TryChangeWeather();
-				// TODO Combat
+				CurrentTeamActs();
+				ApplyWeatherEffect();
 				RemoveDead();
 				CurrentTeamIndex++;
 			}
@@ -63,19 +64,32 @@ namespace Berzerkers.Combat
 
 		private Team GetRandomTeam() => Teams.GetRandom();
 
+		private void CurrentTeamActs()
+		{
+			var actingUnit = CurrentTeam.GetRandom();
+			var defendingTeam = Teams.Where(t => t != CurrentTeam).GetRandom();
+			var defendingUnit = defendingTeam.GetRandom();
+			actingUnit.Attack(defendingUnit);
+		}
+
 		private void RemoveDead()
 		{
 			Teams.ForEach(t => t.RemoveDeadUnits());
 			Teams.RemoveAll(t => t.AllUnitsDead);
 		}
 
-		private void TryChangeWeather()
+		private bool TryChangeWeather()
+		{
+			throw new NotImplementedException();
+		}
+
+		private void ApplyWeatherEffect()
 		{
 			throw new NotImplementedException();
 		}
 	}
 
-	public readonly struct Team : ICollection<Unit.Unit>
+	public readonly struct Team : ICollection<Unit.Unit>, IEquatable<Team>
 	{
 		public readonly string name;
 		public readonly List<Unit.Unit> units;
@@ -100,44 +114,33 @@ namespace Berzerkers.Combat
 		#region OVERRIDES
 		public override string ToString() => name;
 
+		public bool Equals(Team other) => name == other.name && units == other.units;
+
+		public override bool Equals(object obj) => obj is Team team && Equals(team);
+
+		public static bool operator ==(Team left, Team right) => left.Equals(right);
+
+		public static bool operator !=(Team left, Team right) => !(left == right);
+
+		public override int GetHashCode() => name.GetHashCode() ^ units.GetHashCode();
+
 		#region ICOLLECTION
-		public int Count => ((ICollection<Unit.Unit>)units).Count;
-		public bool IsReadOnly => ((ICollection<Unit.Unit>)units).IsReadOnly;
+		public int Count => (units as ICollection<Unit.Unit>).Count;
+		public bool IsReadOnly => (units as ICollection<Unit.Unit>).IsReadOnly;
 
-		public void Add(Unit.Unit item)
-		{
-			((ICollection<Unit.Unit>)units).Add(item);
-		}
+		public void Add(Unit.Unit item) => (units as ICollection<Unit.Unit>).Add(item);
 
-		public void Clear()
-		{
-			((ICollection<Unit.Unit>)units).Clear();
-		}
+		public void Clear() => (units as ICollection<Unit.Unit>).Clear();
 
-		public bool Contains(Unit.Unit item)
-		{
-			return ((ICollection<Unit.Unit>)units).Contains(item);
-		}
+		public bool Contains(Unit.Unit item) => (units as ICollection<Unit.Unit>).Contains(item);
 
-		public void CopyTo(Unit.Unit[] array, int arrayIndex)
-		{
-			((ICollection<Unit.Unit>)units).CopyTo(array, arrayIndex);
-		}
+		public void CopyTo(Unit.Unit[] array, int arrayIndex) => (units as ICollection<Unit.Unit>).CopyTo(array, arrayIndex);
 
-		public bool Remove(Unit.Unit item)
-		{
-			return ((ICollection<Unit.Unit>)units).Remove(item);
-		}
+		public bool Remove(Unit.Unit item) => (units as ICollection<Unit.Unit>).Remove(item);
 
-		public IEnumerator<Unit.Unit> GetEnumerator()
-		{
-			return ((IEnumerable<Unit.Unit>)units).GetEnumerator();
-		}
+		public IEnumerator<Unit.Unit> GetEnumerator() => (units as IEnumerable<Unit.Unit>).GetEnumerator();
 
-		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return ((IEnumerable)units).GetEnumerator();
-		}
+		IEnumerator IEnumerable.GetEnumerator() => (units as IEnumerable).GetEnumerator();
 		#endregion
 		#endregion
 	}
