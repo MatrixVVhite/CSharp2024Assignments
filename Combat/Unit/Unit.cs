@@ -30,12 +30,20 @@
 			CarryingCapacity = carryingCapacity;
 		}
 
+		/// <summary>
+		/// This unit attempts to attack 'other', determine if attack lands.
+		/// </summary>
+		/// <param name="other">The defending unit</param>
 		public virtual void Attack(Unit other)
 		{
 			if (Hit.Roll() > other.Avoid.Roll())
 				other.Defend(this);
 		}
 
+		/// <summary>
+		/// This unit gets hit by 'other', calculate other's damage.
+		/// </summary>
+		/// <param name="other"></param>
 		protected virtual void Defend(Unit other) => ApplyDamage(other.Damage.Roll());
 
 		protected void ApplyDamage(int damage) => CurrentHP -= damage;
