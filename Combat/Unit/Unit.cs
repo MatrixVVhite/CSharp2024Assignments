@@ -19,7 +19,7 @@
 		public bool IsDead => CurrentHP <= 0;
 		public Race Race => _race;
 
-		public Unit(int hp, Dice damage, Race race, int carryingCapacity, Dice hit = new(), Dice avoid = new())
+		public Unit(int hp, Dice damage, Dice hit, Dice avoid, Race race, int carryingCapacity)
 		{
 			MaxHP = hp;
 			CurrentHP = hp;
