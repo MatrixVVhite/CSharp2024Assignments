@@ -18,9 +18,9 @@ static class Utility
 
 	public static bool RollChance(float chanceToSucceed) => chanceToSucceed > Random.Shared.NextDouble();
 
-	public static T GetRandom<T>(this ICollection<T> collection, Random random) => collection.ElementAt(random.Next(collection.Count));
+	public static T GetRandom<T>(this IEnumerable<T> collection, Random random) => collection.ElementAt(random.Next(collection.Count()));
 
-	public static T GetRandom<T>(this ICollection<T> collection) => collection.GetRandom(Random.Shared);
+	public static T GetRandom<T>(this IEnumerable<T> collection) => collection.GetRandom(Random.Shared);
 
 	public static void BlockUntilKeyDown() => Console.ReadKey();
 }
