@@ -1,47 +1,33 @@
-﻿namespace Berzerkers.Combat.Unit.UnitTypes.Races
+﻿namespace Berzerkers.Combat.Unit.UnitTypes.Races.Void
 {
 	public sealed class Sentinel : Bruiser
 	{
-		private float _damageMultiplier;
-
-		public Sentinel() : base(8, 4, Race.Void)
-		{
-			_damageMultiplier = 2f;
-		}
+		public Sentinel() : base(8, new(scalar: 2, baseDie: 2), Race.Void) { }
 
 		/// <summary>
-		/// Attacks twice if has more HP than target, attacks for double damage if target is of race Cyber.
+		/// Attacks with more, larger, dice if target is of race Cyber.
 		/// </summary>
 		/// <param name="other"></param>
 		public override void Attack(Unit other)
 		{
 			if (other.Race == Race.Cyber)
-			{
-				int defaultDamage = Damage;
-				Damage = (int)(Damage * _damageMultiplier);
-				base.Attack(other);
-				Damage = defaultDamage;
-			}
+				AttackOverrideDamage(other, Damage.AddBaseDie().AddScalar());
 			else
-			{
 				base.Attack(other);
-			}
 		}
 	}
 
 	public sealed class Bonewalker : Marauder
 	{
-		private int _damageOnDeath;
+		private Dice _damageOnDeath;
 
-		public int DamageOnDeath => _damageOnDeath;
-
-		public Bonewalker() : base(13, 3, Race.Void)
+		public Bonewalker() : base(13, new(baseDie: 4), Race.Void)
 		{
-			_damageOnDeath = 5;
+			_damageOnDeath = new(scalar: 2, baseDie: 3);
 		}
 
 		/// <summary>
-		/// Deals 5 damage to attacker on death.
+		/// On death, makes an attack for 2d3 damage.
 		/// </summary>
 		/// <param name="other"></param>
 		protected override void Defend(Unit other)
@@ -62,13 +48,13 @@
 	{
 		private float _secondAttackAtThreshold;
 
-		public Garuda() : base(25, 5, Race.Void)
+		public Garuda() : base(15, new(scalar: 2, baseDie: 2, modifier: 2), Race.Void)
 		{
 			_secondAttackAtThreshold = .5f;
 		}
 
 		/// <summary>
-		/// Makes a second attack upon lowering the enemy's HP below 50%.
+		/// Makes a second attack upon lowering the enemy's HP to 50% or less.
 		/// </summary>
 		/// <param name="other"></param>
 		public override void Attack(Unit other)
