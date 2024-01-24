@@ -40,7 +40,29 @@
 
 		protected void ApplyDamage(int damage) => CurrentHP -= damage;
 
-		public abstract void ApplyWeatherEffect(WeatherEffect weatherEffect);
+		public virtual void ApplyWeatherEffect(WeatherEffect weatherEffect)
+		{
+			switch (weatherEffect)
+			{
+				case WeatherEffect.None:
+					break;
+				case WeatherEffect.Sandstorm:
+					if (Race == Race.Cyber && CurrentHP > 1)
+						ApplyDamage(1);
+					break;
+				case WeatherEffect.Rain:
+					if (Race == Race.Void && CurrentHP > 1)
+						ApplyDamage(1);
+					break;
+				case WeatherEffect.AcidRain:
+					if (Race == Race.Bio && CurrentHP > 1)
+						ApplyDamage(1);
+					break;
+				case WeatherEffect.Miasma:
+					ApplyDamage(1);
+					break;
+			}
+		}
 
 		public void Heal(int amount) => CurrentHP += amount;
 	}
