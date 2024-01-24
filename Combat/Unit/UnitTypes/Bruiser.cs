@@ -20,5 +20,21 @@
 				base.Attack(other);
 			}
 		}
+
+		protected void AttackOverrideDamage(Unit other, Dice overrideDamage)
+		{
+			Dice baseDamage = Damage;
+			Damage = overrideDamage;
+			Attack(other);
+			Damage = baseDamage;
+		}
+
+		protected void AttackOverrideHit(Unit other, Dice overrideHit)
+		{
+			Dice baseHit = Hit;
+			Hit = overrideHit;
+			Attack(other);
+			Damage = baseHit;
+		}
 	}
 }
