@@ -1,31 +1,24 @@
-﻿namespace Berzerkers.Combat.Unit.UnitTypes.Races
+﻿namespace Berzerkers.Combat.Unit.UnitTypes.Races.Cyber
 {
 	public sealed class Blitzer : Bruiser
 	{
-		private float _damageMultiplier;
+		private short _hitIncrease;
 
-		public Blitzer() : base(11, 3, Race.Cyber)
+		public Blitzer() : base(11, new(baseDie: 2, modifier: 1), Race.Cyber)
 		{
-			_damageMultiplier = 1.5f;
+			_hitIncrease = 2;
 		}
 
 		/// <summary>
-		/// Attacks twice if has more HP than target, attacks for 150% damage if target is of race Bio.
+		/// Attacks with +2 accuracy if target is of race Bio.
 		/// </summary>
 		/// <param name="other"></param>
 		public override void Attack(Unit other)
 		{
 			if (other.Race == Race.Bio)
-			{
-				int defaultDamage = Damage;
-				Damage = (int)(Damage * _damageMultiplier);
-				base.Attack(other);
-				Damage = defaultDamage;
-			}
+				AttackOverrideHit(other, Hit.AddModifier(_hitIncrease));
 			else
-			{
 				base.Attack(other);
-			}
 		}
 	}
 
@@ -34,7 +27,7 @@
 		/// <summary>
 		/// If not at 1HP, can always survive fatal blows at 1HP.
 		/// </summary>
-		public MetalVanguard() : base(16, 1, Race.Cyber, 0f, 1) { }
+		public MetalVanguard() : base(16, new(baseDie: 2), Race.Cyber, surviveHpThreshold: 0f, surviveAtHp: 1) { }
 	}
 
 	public sealed class Draedon : Marauder
@@ -44,7 +37,7 @@
 
 		public int RevivalCells => _revivalCells;
 
-		public Draedon() : base(20, 2, Race.Cyber, 0f, 1)
+		public Draedon() : base(25, new(baseDie: 3), Race.Cyber, surviveHpThreshold: 0f, surviveAtHp: 1)
 		{
 			_revivalCells = 1;
 			_reviveAtHp = .5f;
