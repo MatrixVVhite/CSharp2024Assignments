@@ -49,7 +49,7 @@ namespace Berzerkers.Combat
 			switch (TeamsLeft)
 			{
 				case 1:
-					Console.WriteLine($"Team {CurrentTeam} wins.");
+					Console.WriteLine($"Team {GetWinningTeam()} wins.");
 					break;
 				case 0:
 					Console.WriteLine("No team has survived.");
@@ -62,7 +62,7 @@ namespace Berzerkers.Combat
 
 		private int GetRandomTeamIndex() => Random.Shared.Next(TeamsLeft);
 
-		private Team GetRandomTeam() => Teams.GetRandom();
+		private Team? GetWinningTeam() => TeamsLeft == 1 ? Teams[0] : null;
 
 		private void CurrentTeamActs()
 		{
