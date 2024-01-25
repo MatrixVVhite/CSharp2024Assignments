@@ -36,7 +36,7 @@
 		/// <param name="other">The defending unit</param>
 		public virtual void Attack(Unit other)
 		{
-			if (Hit.Roll() > other.Avoid.Roll())
+			if (Hit.Roll() >= other.Avoid.Roll())
 				other.Defend(this);
 		}
 
