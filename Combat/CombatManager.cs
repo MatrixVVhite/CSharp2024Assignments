@@ -70,6 +70,18 @@ namespace Berzerkers.Combat
 			var defendingTeam = Teams.Where(t => t != CurrentTeam).GetRandom();
 			var defendingUnit = defendingTeam.GetRandom();
 			actingUnit.Attack(defendingUnit);
+			PrintIfKilled(defendingUnit, actingUnit);
+			PrintIfKilled(actingUnit, defendingUnit);
+		}
+
+		private bool PrintIfKilled(Unit.Unit killed, Unit.Unit by)
+		{
+			if (killed.IsDead)
+			{
+				Console.WriteLine($"{killed} is was killed by {by}.");
+				return true;
+			}
+			return false;
 		}
 
 		private void RemoveDead()
@@ -106,8 +118,6 @@ namespace Berzerkers.Combat
 		public Team(string name, params Unit.Unit[] units) : this(name, new List<Unit.Unit>(units)) { }
 
 		public Unit.Unit[] GetDeadUnits() => units.Where(u => u.IsDead).ToArray();
-
-		public Unit.Unit PickRandomUnit() => units.GetRandom();
 
 		public int RemoveDeadUnits() => units.RemoveAll(u => u.IsDead);
 
