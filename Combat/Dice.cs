@@ -27,7 +27,7 @@
 		private readonly int RollSingle() => 1 + Random.Shared.Next(baseDie);
 
 		#region OVERRIDES
-		public override readonly string ToString() => $"{scalar}d{baseDie}{(modifier>0?"": '+')}{modifier}";
+		public override readonly string ToString() => $"{scalar}d{baseDie}{(modifier>=0 ? '+' : string.Empty)}{modifier}";
 
 		public override bool Equals(object? obj) => obj is Dice dice && Equals(dice);
 
