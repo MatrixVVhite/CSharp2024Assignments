@@ -2,6 +2,9 @@
 {
 	static class DiceExtensions
 	{
+		public static readonly Dice oneD6 = new(scalar: 1, baseDie: 6);
+		public static readonly Dice twoD12 = new(scalar: 2, baseDie: 6);
+
 		public static Dice SetModifier(this Dice dice, short modifier) => new(dice.scalar, dice.baseDie, modifier);
 
 		public static Dice AddModifier(this Dice dice, short modifier = 1) => dice.SetModifier((short)(dice.modifier + modifier));
