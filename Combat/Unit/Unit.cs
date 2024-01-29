@@ -7,7 +7,7 @@
 		private Dice _damage;
 		private Dice _hit;
 		private Dice _avoid;
-		private int _carryingCapacity;
+		private int _loot;
 		private Race _race;
 
 		public string Name { get; protected set; }
@@ -16,7 +16,7 @@
 		public Dice Damage { get => _damage; protected set => _damage = value; }
 		public Dice Hit { get => _hit; protected set => _hit = value; }
 		public Dice Avoid { get => _avoid; protected set => _avoid = value; }
-		public int CarryingCapacity { get => _carryingCapacity; protected set => _carryingCapacity = value; }
+		public int Loot { get => _loot; protected set => _loot = value; }
 		public bool IsDead => CurrentHP <= 0;
 		public Race Race => _race;
 
@@ -29,7 +29,7 @@
 			Hit = hit;
 			Avoid = avoid;
 			_race = race;
-			CarryingCapacity = carryingCapacity;
+			Loot = carryingCapacity;
 		}
 
 		/// <summary>

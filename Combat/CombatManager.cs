@@ -13,10 +13,13 @@ namespace Berzerkers.Combat
 		private Team CurrentTeam => Teams[CurrentTeamIndex];
 		private int TeamsLeft => Teams.Count;
 		private bool ContinueCombat => TeamsLeft > 1;
+		private List<Unit.Unit> DeadUnits {get; set;}
 
 		public CombatManager(List<Team> teams)
 		{
 			Teams = teams;
+			int unitsCount = Teams.Sum(t => t.UnitCount);
+			DeadUnits = new(unitsCount);
 		}
 
 		public CombatManager(params Team[] teams) : this(new List<Team>(teams)) { }
@@ -96,7 +99,8 @@ namespace Berzerkers.Combat
 			{
 				case 1:
 					Team winningTeam = GetWinningTeam()!.Value;
-					Console.WriteLine($"{winningTeam} wins with {winningTeam.UnitCount} unit/s left.");
+					int recoveredLoot = DeadUnits.Sum(u => u.Loot);
+					Console.WriteLine($"{winningTeam} wins with {winningTeam.UnitCount} unit/s left\n{winningTeam} has gained {recoveredLoot} loot.");
 					break;
 				case 0:
 					Console.WriteLine("No team has survived.");
@@ -121,6 +125,7 @@ namespace Berzerkers.Combat
 
 		private void RemoveDead()
 		{
+			Teams.ForEach(t => DeadUnits.AddRange(t.GetDeadUnits()));
 			Teams.ForEach(t => t.RemoveDeadUnits());
 			Teams.RemoveAll(t => t.AllUnitsDead);
 		}
