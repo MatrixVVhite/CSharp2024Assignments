@@ -27,7 +27,7 @@
 		/// <summary>
 		/// If not at 1HP, can always survive fatal blows at 1HP.
 		/// </summary>
-		public MetalVanguard(string name = "MetalVanguard") : base(name, 16, new(baseDie: 2), Race.Cyber, surviveHpThreshold: 0f, surviveAtHp: 1) { }
+		public MetalVanguard(string name = "Metal Vanguard") : base(name, 16, new(baseDie: 2), Race.Cyber, surviveHpThreshold: 0f, surviveAtHp: 1) { }
 	}
 
 	public sealed class Draedon : Marauder

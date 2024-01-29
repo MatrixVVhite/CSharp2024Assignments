@@ -2,7 +2,7 @@
 {
 	public enum WeatherEffect
 	{
-		None,
+		Clear,
 		Sandstorm,
 		Rain,
 		AcidRain,

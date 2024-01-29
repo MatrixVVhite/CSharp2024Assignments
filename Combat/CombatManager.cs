@@ -35,7 +35,7 @@ namespace Berzerkers.Combat
 		{
 			PrintCombatStarted();
 			CurrentTeamIndex = GetRandomTeamIndex();
-			CurrentWeatherEffect = WeatherEffect.None;
+			CurrentWeatherEffect = WeatherEffect.Clear;
 			CurrentWeatherStrength = 0;
 		}
 
@@ -62,6 +62,7 @@ namespace Berzerkers.Combat
 
 		private void CurrentTeamActs()
 		{
+			Console.WriteLine($"\t{CurrentTeam}'s turn:");
 			var actingUnit = CurrentTeam.GetRandom();
 			var defendingTeam = Teams.Where(t => t != CurrentTeam).GetRandom();
 			var defendingUnit = defendingTeam.GetRandom();

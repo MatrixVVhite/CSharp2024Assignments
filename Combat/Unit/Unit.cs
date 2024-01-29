@@ -53,7 +53,7 @@
 		{
 			int damage = other.Damage.Roll();
 			ApplyDamage(damage);
-			Console.WriteLine($"{other} deals {damage} to {this}.");
+			Console.WriteLine($"{other} deals {damage} damage to {this}.");
 		}
 
 		protected void ApplyDamage(int damage) => CurrentHP -= damage;
@@ -62,7 +62,7 @@
 		{
 			switch (weatherEffect)
 			{
-				case WeatherEffect.None:
+				case WeatherEffect.Clear:
 					break;
 				case WeatherEffect.Sandstorm:
 					if (Race == Race.Cyber && CurrentHP > 1)
