@@ -77,7 +77,8 @@
 						ApplyDamage(1);
 					break;
 				case WeatherEffect.Miasma:
-					ApplyDamage(1);
+					if (CurrentHP > 1)
+						ApplyDamage(1);
 					break;
 			}
 		}
