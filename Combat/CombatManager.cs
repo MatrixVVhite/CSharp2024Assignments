@@ -24,14 +24,17 @@ namespace Berzerkers.Combat
 		public void Fight()
 		{
 			CombatStart();
-			CombatLoop();
-			CombatEnd();
+			if (ContinueCombat)
+			{
+				CombatLoop();
+				CombatEnd();
+			}
 		}
 
 		private void CombatStart()
 		{
+			PrintCombatStarted();
 			CurrentTeamIndex = GetRandomTeamIndex();
-			Console.WriteLine($"Team {CurrentTeam} gets to go first.");
 			CurrentWeatherEffect = WeatherEffect.None;
 			CurrentWeatherStrength = 0;
 		}
@@ -40,28 +43,17 @@ namespace Berzerkers.Combat
 		{
 			while (ContinueCombat)
 			{
+				CurrentTeamIndex++;
 				TryChangeWeather();
 				CurrentTeamActs();
 				ApplyWeatherEffect();
 				RemoveDead();
-				CurrentTeamIndex++;
 			}
 		}
 
 		private void CombatEnd()
 		{
-			switch (TeamsLeft)
-			{
-				case 1:
-					Console.WriteLine($"Team {GetWinningTeam()} wins.");
-					break;
-				case 0:
-					Console.WriteLine("No team has survived.");
-					break;
-				default:
-					Console.WriteLine("Combat has ended prematurely.");
-					break;
-			}
+			PrintCombatEnded();
 		}
 
 		private int GetRandomTeamIndex() => Random.Shared.Next(TeamsLeft);
@@ -78,11 +70,49 @@ namespace Berzerkers.Combat
 			PrintIfKilled(actingUnit, defendingUnit);
 		}
 
+		private void PrintCombatStarted()
+		{
+			switch (TeamsLeft)
+			{
+				case 0:
+					Console.WriteLine("Combat has started but no one bothered.");
+					break;
+				case 1:
+					Console.WriteLine($"{CurrentTeam} has entered an empty battlefield.");
+					break;
+				case 2:
+					Console.WriteLine($"{Teams[0]} dukes it out vs {Teams[1]}.");
+					break;
+				default:
+					Console.WriteLine($"{TeamsLeft} teams battle it out.");
+					break;
+			}
+		}
+
+		private void PrintCombatEnded()
+		{
+			switch (TeamsLeft)
+			{
+				case 1:
+					Team winningTeam = GetWinningTeam()!.Value;
+					Console.WriteLine($"{winningTeam} wins with {winningTeam.UnitCount} unit/s left.");
+					break;
+				case 0:
+					Console.WriteLine("No team has survived.");
+					break;
+				default:
+					Console.WriteLine("Combat has ended prematurely.");
+					break;
+			}
+		}
+
 		private static bool PrintIfKilled(Unit.Unit killed, Unit.Unit by)
 		{
 			if (killed.IsDead)
 			{
-				Console.WriteLine($"{killed} is was killed by {by}.");
+				Console.ForegroundColor = ConsoleColor.Red;
+				Console.WriteLine($"{killed} was killed by {by}.");
+				Console.ForegroundColor = ConsoleColor.Gray;
 				return true;
 			}
 			return false;
@@ -100,7 +130,7 @@ namespace Berzerkers.Combat
 			if (changeWeatherDice.Roll() > CurrentWeatherStrength)
 			{
 				CurrentWeatherEffect = GetRandomWeatherEffect();
-				Console.WriteLine($"The weather has changed to {CurrentWeatherEffect}");
+				Console.WriteLine($"The weather has changed to {CurrentWeatherEffect}.");
 				return true;
 			}
 			CurrentWeatherStrength--;

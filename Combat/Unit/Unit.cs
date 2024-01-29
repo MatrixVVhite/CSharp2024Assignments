@@ -38,15 +38,23 @@
 		/// <param name="other">The defending unit</param>
 		public virtual void Attack(Unit other)
 		{
+			Console.WriteLine($"{this} attacks {other}.");
 			if (Hit.Roll() >= other.Avoid.Roll())
 				other.Defend(this);
+			else
+				Console.WriteLine($"{this}'s attack misses.");
 		}
 
 		/// <summary>
 		/// This unit gets hit by 'other', calculate other's damage.
 		/// </summary>
 		/// <param name="other"></param>
-		protected virtual void Defend(Unit other) => ApplyDamage(other.Damage.Roll());
+		protected virtual void Defend(Unit other)
+		{
+			int damage = other.Damage.Roll();
+			ApplyDamage(damage);
+			Console.WriteLine($"{other} deals {damage} to {this}.");
+		}
 
 		protected void ApplyDamage(int damage) => CurrentHP -= damage;
 
@@ -74,7 +82,11 @@
 			}
 		}
 
-		public void Heal(int amount) => CurrentHP += amount;
+		public void Heal(int amount)
+		{
+			CurrentHP += amount;
+			Console.WriteLine($"{this} healed for {amount} HP.");
+		}
 
 		public override string ToString() => Name;
 	}

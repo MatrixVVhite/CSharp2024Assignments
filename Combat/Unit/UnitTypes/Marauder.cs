@@ -1,6 +1,7 @@
 ﻿namespace Berzerkers.Combat.Unit.UnitTypes
 {
 	using static DiceExtensions;
+	using static System.Net.Mime.MediaTypeNames;
 
 	public abstract class Marauder : Unit
 	{
@@ -30,6 +31,7 @@
 			int incomingDamage = other.Damage.Roll();
 			if (CanSurvive)
 				incomingDamage = Utility.ClampMax(incomingDamage, CurrentHP - _surviveAtHp);
+			Console.WriteLine($"{other} deals {incomingDamage} to {this}.");
 			ApplyDamage(incomingDamage);
 		}
 	}
