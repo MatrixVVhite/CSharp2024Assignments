@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-static class Utility
+﻿static class Utility
 {
 	public static void Swap<T>(ref T obj1, ref T obj2) => (obj2, obj1) = (obj1, obj2);
 
@@ -18,9 +16,21 @@ static class Utility
 
 	public static bool RollChance(float chanceToSucceed) => chanceToSucceed > Random.Shared.NextDouble();
 
-	public static T GetRandom<T>(this IEnumerable<T> collection, Random random) => collection.ElementAt(random.Next(collection.Count()));
+	public static T GetRandom<T>(this T[] array) => array.GetRandom(Random.Shared);
 
-	public static T GetRandom<T>(this IEnumerable<T> collection) => collection.GetRandom(Random.Shared);
+	public static T GetRandom<T>(this T[] array, Random random) => array[random.Next(array.Length)];
+
+	public static T GetRandom<T>(this IEnumerable<T> enumerable, Random random) => enumerable.ElementAt(random.Next(enumerable.Count()));
+
+	public static T GetRandom<T>(this IEnumerable<T> enumerable) => enumerable.GetRandom(Random.Shared);
+
+	public static Enum GetRandom(this Type t, Random random)
+	{
+		var arr = Enum.GetValues(t);
+		return (Enum)Enum.GetValues(t).GetValue(random.Next(arr.Length));
+	}
+
+	public static Enum GetRandom(this Type t) => t.GetRandom(Random.Shared);
 
 	public static void BlockUntilKeyDown() => Console.ReadKey();
 }
