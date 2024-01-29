@@ -4,9 +4,9 @@
 
 	public abstract class Bruiser : Unit
 	{
-		public Bruiser(int hp, Dice damage, Race race, Dice hit, Dice avoid, int carryingCapacity = 5) : base(hp, damage, hit, avoid, race, carryingCapacity) { }
+		public Bruiser(string name, int hp, Dice damage, Race race, Dice hit, Dice avoid, int carryingCapacity = 5) : base(name, hp, damage, hit, avoid, race, carryingCapacity) { }
 		
-		public Bruiser(int hp, Dice damage, Race race, int carryingCapacity = 5) : base(hp, damage, oneD6, oneD6, race, carryingCapacity) { }
+		public Bruiser(string name, int hp, Dice damage, Race race, int carryingCapacity = 5) : base(name, hp, damage, oneD6, oneD6, race, carryingCapacity) { }
 
 		/// <summary>
 		/// If HP is higher than target's HP when calling this, attacks twice.

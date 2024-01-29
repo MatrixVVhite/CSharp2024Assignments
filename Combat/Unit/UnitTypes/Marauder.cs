@@ -9,13 +9,13 @@
 
 		private bool CanSurvive => CurrentHP > _surviveAtHp && this.GetHPPercentage() >= _surviveHpThreshold;
 
-		public Marauder(int hp, Dice damage, Race race, Dice hit, Dice avoid, int carryingCapacity = 8, float surviveHpThreshold = .1f, int surviveAtHp = 1) : base(hp, damage, hit, avoid, race, carryingCapacity)
+		public Marauder(string name, int hp, Dice damage, Race race, Dice hit, Dice avoid, int carryingCapacity = 8, float surviveHpThreshold = .1f, int surviveAtHp = 1) : base(name, hp, damage, hit, avoid, race, carryingCapacity)
 		{
 			_surviveHpThreshold = surviveHpThreshold;
 			_surviveAtHp = surviveAtHp;
 		}
 
-		public Marauder(int hp, Dice damage, Race race, int carryingCapacity = 8, float surviveHpThreshold = .1f, int surviveAtHp = 1) : base(hp, damage, oneD6, oneD6, race, carryingCapacity)
+		public Marauder(string name, int hp, Dice damage, Race race, int carryingCapacity = 8, float surviveHpThreshold = .1f, int surviveAtHp = 1) : base(name, hp, damage, oneD6, oneD6, race, carryingCapacity)
 		{
 			_surviveHpThreshold = surviveHpThreshold;
 			_surviveAtHp = surviveAtHp;

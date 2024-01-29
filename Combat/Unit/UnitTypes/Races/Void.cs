@@ -2,7 +2,7 @@
 {
 	public sealed class Sentinel : Bruiser
 	{
-		public Sentinel() : base(8, new(scalar: 2, baseDie: 2), Race.Void) { }
+		public Sentinel(string name = "Sentinel") : base(name, 8, new(scalar: 2, baseDie: 2), Race.Void) { }
 
 		/// <summary>
 		/// Attacks with more, larger, dice if target is of race Cyber.
@@ -21,7 +21,7 @@
 	{
 		private Dice _damageOnDeath;
 
-		public Bonewalker() : base(13, new(baseDie: 4), Race.Void)
+		public Bonewalker(string name = "Bonewalker") : base(name, 13, new(baseDie: 4), Race.Void)
 		{
 			_damageOnDeath = new(scalar: 2, baseDie: 3);
 		}
@@ -48,7 +48,7 @@
 	{
 		private float _secondAttackAtThreshold;
 
-		public Garuda() : base(15, new(scalar: 2, baseDie: 2, modifier: 2), Race.Void)
+		public Garuda(string name = "Garuda") : base(name, 15, new(scalar: 2, baseDie: 2, modifier: 2), Race.Void)
 		{
 			_secondAttackAtThreshold = .5f;
 		}

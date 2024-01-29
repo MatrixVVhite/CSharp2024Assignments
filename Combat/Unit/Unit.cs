@@ -10,6 +10,7 @@
 		private int _carryingCapacity;
 		private Race _race;
 
+		public string Name { get; protected set; }
 		public int MaxHP { get => _maxHp; protected set => _maxHp = Utility.ClampMin(value, 1); }
 		public int CurrentHP { get => _currentHp; protected set => _currentHp = Utility.ClampRange(value, 0, _maxHp); }
 		public Dice Damage { get => _damage; protected set => _damage = value; }
@@ -19,8 +20,9 @@
 		public bool IsDead => CurrentHP <= 0;
 		public Race Race => _race;
 
-		public Unit(int hp, Dice damage, Dice hit, Dice avoid, Race race, int carryingCapacity)
+		public Unit(string name, int hp, Dice damage, Dice hit, Dice avoid, Race race, int carryingCapacity)
 		{
+			Name = name;
 			MaxHP = hp;
 			CurrentHP = hp;
 			Damage = damage;
@@ -73,6 +75,8 @@
 		}
 
 		public void Heal(int amount) => CurrentHP += amount;
+
+		public override string ToString() => Name;
 	}
 
 	public enum Race

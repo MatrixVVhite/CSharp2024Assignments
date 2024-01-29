@@ -2,7 +2,7 @@
 {
 	public sealed class WarCleric : Bruiser
 	{
-		public WarCleric() : base(10, new(baseDie: 4), Race.Bio) { }
+		public WarCleric(string name = "WarCleric") : base(name, 10, new(baseDie: 4), Race.Bio) { }
 
 		/// <summary>
 		/// Attacks with an additional die if target is of race Void.
@@ -22,7 +22,7 @@
 		private readonly float _regenLostHealth;
 		private readonly int _maxRegenAmount;
 
-		public Cataphract() : base(15, new(baseDie: 3, modifier: 0), Race.Bio, surviveHpThreshold: .2f)
+		public Cataphract(string name = "Cataphract") : base(name, 15, new(baseDie: 3, modifier: 0), Race.Bio, surviveHpThreshold: .2f)
 		{
 			_regenLostHealth = .5f;
 			_maxRegenAmount = 2;
@@ -50,7 +50,7 @@
 		private Dice _reviveDice;
 		private readonly short _onReviveDiceModifier;
 
-		public Hegemon() : base(20, new(baseDie: 2, modifier: 1), Race.Bio)
+		public Hegemon(string name = "Hegemon") : base(name, 20, new(baseDie: 2, modifier: 1), Race.Bio)
 		{
 			_reviveDice = new Dice(2, 6, -6);
 			_onReviveDiceModifier = -2;

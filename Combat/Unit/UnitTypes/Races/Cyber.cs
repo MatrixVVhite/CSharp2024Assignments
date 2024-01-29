@@ -4,7 +4,7 @@
 	{
 		private short _hitIncrease;
 
-		public Blitzer() : base(11, new(baseDie: 2, modifier: 1), Race.Cyber)
+		public Blitzer(string name = "Blitzer") : base(name, 11, new(baseDie: 2, modifier: 1), Race.Cyber)
 		{
 			_hitIncrease = 2;
 		}
@@ -27,7 +27,7 @@
 		/// <summary>
 		/// If not at 1HP, can always survive fatal blows at 1HP.
 		/// </summary>
-		public MetalVanguard() : base(16, new(baseDie: 2), Race.Cyber, surviveHpThreshold: 0f, surviveAtHp: 1) { }
+		public MetalVanguard(string name = "MetalVanguard") : base(name, 16, new(baseDie: 2), Race.Cyber, surviveHpThreshold: 0f, surviveAtHp: 1) { }
 	}
 
 	public sealed class Draedon : Marauder
@@ -37,7 +37,7 @@
 
 		public int RevivalCells => _revivalCells;
 
-		public Draedon() : base(25, new(baseDie: 3), Race.Cyber, surviveHpThreshold: 0f, surviveAtHp: 1)
+		public Draedon(string name = "Draedon") : base(name, 25, new(baseDie: 3), Race.Cyber, surviveHpThreshold: 0f, surviveAtHp: 1)
 		{
 			_revivalCells = 1;
 			_reviveAtHp = .5f;
