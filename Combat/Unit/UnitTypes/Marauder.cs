@@ -1,9 +1,12 @@
-﻿namespace Berzerkers.Combat.Unit.UnitTypes
-{
-	using static DiceExtensions;
-	using static System.Net.Mime.MediaTypeNames;
+﻿using Berzerkers.Random;
 
-	public abstract class Marauder : Unit
+namespace Berzerkers.Combat.Unit.UnitTypes
+{
+    using Berzerkers.Random;
+    using static DiceExtensions;
+    using static System.Net.Mime.MediaTypeNames;
+
+    public abstract class Marauder : Unit
 	{
 		private float _surviveHpThreshold;
 		private int _surviveAtHp;

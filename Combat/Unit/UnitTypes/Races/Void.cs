@@ -1,6 +1,8 @@
-﻿namespace Berzerkers.Combat.Unit.UnitTypes.Races.Void
+﻿using Berzerkers.Random;
+
+namespace Berzerkers.Combat.Unit.UnitTypes.Races.Void
 {
-	public sealed class Sentinel : Bruiser
+    public sealed class Sentinel : Bruiser
 	{
 		public Sentinel(string name = "Sentinel") : base(name, 8, new(scalar: 2, baseDie: 2), Race.Void) { }
 

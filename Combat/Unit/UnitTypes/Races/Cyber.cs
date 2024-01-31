@@ -1,6 +1,8 @@
-﻿namespace Berzerkers.Combat.Unit.UnitTypes.Races.Cyber
+﻿using Berzerkers.Random;
+
+namespace Berzerkers.Combat.Unit.UnitTypes.Races.Cyber
 {
-	public sealed class Blitzer : Bruiser
+    public sealed class Blitzer : Bruiser
 	{
 		private short _hitIncrease;
 

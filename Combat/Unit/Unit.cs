@@ -1,6 +1,8 @@
-﻿namespace Berzerkers.Combat.Unit
+﻿using Berzerkers.Random;
+
+namespace Berzerkers.Combat.Unit
 {
-	public abstract class Unit
+    public abstract class Unit
 	{
 		private int _maxHp;
 		private int _currentHp;

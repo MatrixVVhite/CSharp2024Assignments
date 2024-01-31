@@ -1,8 +1,11 @@
-﻿namespace Berzerkers.Combat.Unit.UnitTypes
-{
-	using static DiceExtensions;
+﻿using Berzerkers.Random;
 
-	public abstract class Bruiser : Unit
+namespace Berzerkers.Combat.Unit.UnitTypes
+{
+    using Berzerkers.Random;
+    using static DiceExtensions;
+
+    public abstract class Bruiser : Unit
 	{
 		public Bruiser(string name, int hp, Dice damage, Race race, Dice hit, Dice avoid, int carryingCapacity = 5) : base(name, hp, damage, hit, avoid, race, carryingCapacity) { }
 		

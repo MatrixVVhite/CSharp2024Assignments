@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Berzerkers.Random;
 
 namespace Berzerkers.Combat
 {
@@ -59,7 +60,7 @@ namespace Berzerkers.Combat
 			PrintCombatEnded();
 		}
 
-		private int GetRandomTeamIndex() => Random.Shared.Next(TeamsLeft);
+		private int GetRandomTeamIndex() => System.Random.Shared.Next(TeamsLeft);
 
 		private Team? GetWinningTeam() => TeamsLeft == 1 ? Teams[0] : null;
 

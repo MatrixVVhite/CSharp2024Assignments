@@ -1,6 +1,8 @@
-﻿namespace Berzerkers.Combat.Unit.UnitTypes.Races.Bio
+﻿using Berzerkers.Random;
+
+namespace Berzerkers.Combat.Unit.UnitTypes.Races.Bio
 {
-	public sealed class WarCleric : Bruiser
+    public sealed class WarCleric : Bruiser
 	{
 		public WarCleric(string name = "WarCleric") : base(name, 10, new(baseDie: 4), Race.Bio) { }
 
