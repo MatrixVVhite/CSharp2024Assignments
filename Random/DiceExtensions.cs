@@ -13,7 +13,7 @@
 
         public static Dice AddScalar(this Dice dice, byte scalar = 1) => dice.SetScalar((byte)(dice.Scalar + scalar));
 
-        public static Dice SetBaseDie(this Dice dice, byte baseDie) => new(dice.Scalar, (byte)(dice.BaseDie + baseDie), dice.Modifier);
+        public static Dice SetBaseDie(this Dice dice, byte baseDie) => new(dice.Scalar, baseDie, dice.Modifier);
 
         public static Dice AddBaseDie(this Dice dice, byte baseDie = 1) => dice.SetBaseDie((byte)(dice.BaseDie + baseDie));
     }
