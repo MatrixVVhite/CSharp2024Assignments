@@ -6,7 +6,7 @@ namespace Berzerkers.Combat.Unit.UnitTypes.Races.Cyber
 	{
 		private short _hitIncrease;
 
-		public Blitzer(string name = "Blitzer") : base(name, 11, new(baseDie: 2, modifier: 1), Race.Cyber)
+		public Blitzer(string name = "Blitzer") : base(name, 11, new Dice(baseDie: 2, modifier: 1), Race.Cyber)
 		{
 			_hitIncrease = 2;
 		}
@@ -18,7 +18,7 @@ namespace Berzerkers.Combat.Unit.UnitTypes.Races.Cyber
 		public override void Attack(Unit other)
 		{
 			if (other.Race == Race.Bio)
-				AttackOverrideHit(other, Hit.AddModifier(_hitIncrease));
+				AttackOverrideHit(other, ((Dice)Hit).AddModifier(_hitIncrease));
 			else
 				base.Attack(other);
 		}
@@ -29,7 +29,7 @@ namespace Berzerkers.Combat.Unit.UnitTypes.Races.Cyber
 		/// <summary>
 		/// If not at 1HP, can always survive fatal blows at 1HP.
 		/// </summary>
-		public MetalVanguard(string name = "Metal Vanguard") : base(name, 16, new(baseDie: 2), Race.Cyber, surviveHpThreshold: 0f, surviveAtHp: 1) { }
+		public MetalVanguard(string name = "Metal Vanguard") : base(name, 16, new Dice(baseDie: 2), Race.Cyber, surviveHpThreshold: 0f, surviveAtHp: 1) { }
 	}
 
 	public sealed class Draedon : Marauder
@@ -39,7 +39,7 @@ namespace Berzerkers.Combat.Unit.UnitTypes.Races.Cyber
 
 		public int RevivalCells => _revivalCells;
 
-		public Draedon(string name = "Draedon") : base(name, 25, new(baseDie: 3), Race.Cyber, surviveHpThreshold: 0f, surviveAtHp: 1)
+		public Draedon(string name = "Draedon") : base(name, 25, new Dice(baseDie: 3), Race.Cyber, surviveHpThreshold: 0f, surviveAtHp: 1)
 		{
 			_revivalCells = 1;
 			_reviveAtHp = .5f;
@@ -52,8 +52,8 @@ namespace Berzerkers.Combat.Unit.UnitTypes.Races.Cyber
 		protected override void Defend(Unit other)
 		{
 			base.Defend(other);
-			if (IsDead)
-				TryRevive();
+			if (IsDead && TryRevive())
+				Console.WriteLine($"{this} has revived.");
 		}
 
 		private bool TryRevive()

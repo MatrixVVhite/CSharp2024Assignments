@@ -7,9 +7,9 @@ namespace Berzerkers.Combat.Unit.UnitTypes
 
     public abstract class Bruiser : Unit
 	{
-		public Bruiser(string name, int hp, Dice damage, Race race, Dice hit, Dice avoid, int carryingCapacity = 5) : base(name, hp, damage, hit, avoid, race, carryingCapacity) { }
+		public Bruiser(string name, int hp, IRandomProvider<int> damage, Race race, IRandomProvider<int> hit, IRandomProvider<int> avoid, int carryingCapacity = 5) : base(name, hp, damage, hit, avoid, race, carryingCapacity) { }
 		
-		public Bruiser(string name, int hp, Dice damage, Race race, int carryingCapacity = 5) : base(name, hp, damage, oneD6, oneD6, race, carryingCapacity) { }
+		public Bruiser(string name, int hp, IRandomProvider<int> damage, Race race, int carryingCapacity = 5) : base(name, hp, damage, oneD6, oneD6, race, carryingCapacity) { }
 
 		/// <summary>
 		/// If HP is higher than target's HP when calling this, attacks twice.
@@ -32,7 +32,7 @@ namespace Berzerkers.Combat.Unit.UnitTypes
 
 		protected void AttackOverrideDamage(Unit other, Dice overrideDamage)
 		{
-			Dice baseDamage = Damage;
+			IRandomProvider<int> baseDamage = Damage;
 			Damage = overrideDamage;
 			DoubleAttack(other);
 			Damage = baseDamage;
@@ -40,7 +40,7 @@ namespace Berzerkers.Combat.Unit.UnitTypes
 
 		protected void AttackOverrideHit(Unit other, Dice overrideHit)
 		{
-			Dice baseHit = Hit;
+			IRandomProvider<int> baseHit = Hit;
 			Hit = overrideHit;
 			DoubleAttack(other);
 			Damage = baseHit;

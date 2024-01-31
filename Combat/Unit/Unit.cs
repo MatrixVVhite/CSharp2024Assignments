@@ -6,23 +6,19 @@ namespace Berzerkers.Combat.Unit
 	{
 		private int _maxHp;
 		private int _currentHp;
-		private Dice _damage;
-		private Dice _hit;
-		private Dice _avoid;
-		private int _loot;
 		private Race _race;
 
 		public string Name { get; protected set; }
 		public int MaxHP { get => _maxHp; protected set => _maxHp = Utility.ClampMin(value, 1); }
 		public int CurrentHP { get => _currentHp; protected set => _currentHp = Utility.ClampRange(value, 0, _maxHp); }
-		public Dice Damage { get => _damage; protected set => _damage = value; }
-		public Dice Hit { get => _hit; protected set => _hit = value; }
-		public Dice Avoid { get => _avoid; protected set => _avoid = value; }
-		public int Loot { get => _loot; protected set => _loot = value; }
+		public IRandomProvider<int> Damage { get; protected set; }
+		public IRandomProvider<int> Hit { get; protected set; }
+		public IRandomProvider<int> Avoid { get; protected set; }
+		public int Loot { get; protected set; }
 		public bool IsDead => CurrentHP <= 0;
 		public Race Race => _race;
 
-		public Unit(string name, int hp, Dice damage, Dice hit, Dice avoid, Race race, int carryingCapacity)
+		public Unit(string name, int hp, IRandomProvider<int> damage, IRandomProvider<int> hit, IRandomProvider<int> avoid, Race race, int carryingCapacity)
 		{
 			Name = name;
 			MaxHP = hp;
@@ -41,7 +37,7 @@ namespace Berzerkers.Combat.Unit
 		public virtual void Attack(Unit other)
 		{
 			Console.WriteLine($"{this} attacks {other}.");
-			if (Hit.Roll() >= other.Avoid.Roll())
+			if (Hit.GetRandom() >= other.Avoid.GetRandom())
 				other.Defend(this);
 			else
 				Console.WriteLine($"{this}'s attack misses.");
@@ -53,7 +49,7 @@ namespace Berzerkers.Combat.Unit
 		/// <param name="other"></param>
 		protected virtual void Defend(Unit other)
 		{
-			int damage = other.Damage.Roll();
+			int damage = other.Damage.GetRandom();
 			ApplyDamage(damage);
 			Console.WriteLine($"{other} deals {damage} damage to {this}.");
 		}

@@ -4,7 +4,7 @@ namespace Berzerkers.Combat.Unit.UnitTypes.Races.Void
 {
     public sealed class Sentinel : Bruiser
 	{
-		public Sentinel(string name = "Sentinel") : base(name, 8, new(scalar: 2, baseDie: 2), Race.Void) { }
+		public Sentinel(string name = "Sentinel") : base(name, 8, new Dice(scalar: 2, baseDie: 2), Race.Void) { }
 
 		/// <summary>
 		/// Attacks with more, larger, dice if target is of race Cyber.
@@ -13,7 +13,7 @@ namespace Berzerkers.Combat.Unit.UnitTypes.Races.Void
 		public override void Attack(Unit other)
 		{
 			if (other.Race == Race.Cyber)
-				AttackOverrideDamage(other, Damage.AddBaseDie().AddScalar());
+				AttackOverrideDamage(other, ((Dice)Damage).AddBaseDie().AddScalar());
 			else
 				base.Attack(other);
 		}
@@ -23,7 +23,7 @@ namespace Berzerkers.Combat.Unit.UnitTypes.Races.Void
 	{
 		private Dice _damageOnDeath;
 
-		public Bonewalker(string name = "Bonewalker") : base(name, 13, new(baseDie: 4), Race.Void)
+		public Bonewalker(string name = "Bonewalker") : base(name, 13, new Dice(baseDie: 4), Race.Void)
 		{
 			_damageOnDeath = new(scalar: 2, baseDie: 3);
 		}
@@ -50,7 +50,7 @@ namespace Berzerkers.Combat.Unit.UnitTypes.Races.Void
 	{
 		private float _secondAttackAtThreshold;
 
-		public Garuda(string name = "Garuda") : base(name, 15, new(scalar: 2, baseDie: 2, modifier: 2), Race.Void)
+		public Garuda(string name = "Garuda") : base(name, 15, new Dice(scalar: 2, baseDie: 2, modifier: 2), Race.Void)
 		{
 			_secondAttackAtThreshold = .5f;
 		}
