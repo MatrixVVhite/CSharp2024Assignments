@@ -7,20 +7,26 @@ namespace Berzerkers.Combat
 	{
 		private int _currentTeamIndex;
 
+		#region TEAMS
 		private List<Team> Teams { get; set; }
 		private int CurrentTeamIndex { get => _currentTeamIndex; set => _currentTeamIndex = value % TeamsLeft; }
-		private WeatherEffect CurrentWeatherEffect { get; set; }
-		private int CurrentWeatherStrength { get; set; }
 		private Team CurrentTeam => Teams[CurrentTeamIndex];
 		private int TeamsLeft => Teams.Count;
+		private List<Unit.Unit> DeadUnits { get; set; }
+		#endregion
+		#region WEATHER
+		private Bag WeatherEffectsBag { get; set; }
+		private WeatherEffect CurrentWeatherEffect { get; set; }
+		private int CurrentWeatherStrength { get; set; }
 		private bool ContinueCombat => TeamsLeft > 1;
-		private List<Unit.Unit> DeadUnits {get; set;}
+		#endregion
 
 		public CombatManager(List<Team> teams)
 		{
 			Teams = teams;
 			int unitsCount = Teams.Sum(t => t.UnitCount);
 			DeadUnits = new(unitsCount);
+			WeatherEffectsBag = new(0, Enum.GetValues<WeatherEffect>().Length-1);
 		}
 
 		public CombatManager(params Team[] teams) : this(new List<Team>(teams)) { }
@@ -169,9 +175,9 @@ namespace Berzerkers.Combat
 			Teams.ForEach(t => t.units.ForEach(u => u.ApplyWeatherEffect(CurrentWeatherEffect)));
 		}
 
-		private static WeatherEffect GetRandomWeatherEffect()
+		private WeatherEffect GetRandomWeatherEffect()
 		{
-			return (WeatherEffect)typeof(WeatherEffect).GetRandom();
+			return (WeatherEffect)WeatherEffectsBag.GetRandom();
 		}
 	}
 
