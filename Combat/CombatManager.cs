@@ -62,7 +62,7 @@ namespace Berzerkers.Combat
 
 		private int GetRandomTeamIndex() => System.Random.Shared.Next(TeamsLeft);
 
-		private Team? GetWinningTeam() => TeamsLeft == 1 ? Teams[0] : null;
+		private Team? GetWinningTeam() => TeamsLeft == 1 ? Teams.Single() : null;
 
 		private void CurrentTeamActs()
 		{
@@ -86,7 +86,7 @@ namespace Berzerkers.Combat
 					Console.WriteLine($"{CurrentTeam} has entered an empty battlefield.");
 					break;
 				case 2:
-					Console.WriteLine($"{Teams[0]} dukes it out vs {Teams[1]}.");
+					Console.WriteLine($"{Teams.First()} dukes it out vs {Teams.Last()}.");
 					break;
 				default:
 					Console.WriteLine($"{TeamsLeft} teams battle it out.");
@@ -126,8 +126,26 @@ namespace Berzerkers.Combat
 
 		private void RemoveDead()
 		{
+			RemoveDeadUnits();
+			RemoveDeadTeams();
+		}
+
+		private void RemoveDeadUnits()
+		{
 			Teams.ForEach(t => DeadUnits.AddRange(t.GetDeadUnits()));
 			Teams.ForEach(t => t.RemoveDeadUnits());
+		}
+
+		private void RemoveDeadTeams()
+		{
+			Teams.ForEach(t => {
+				if (t.AllUnitsDead)
+				{
+					Console.ForegroundColor = ConsoleColor.Red;
+					Console.WriteLine($"{t} has been wiped out.");
+					Console.ForegroundColor = ConsoleColor.Gray;
+				}
+			});
 			Teams.RemoveAll(t => t.AllUnitsDead);
 		}
 
