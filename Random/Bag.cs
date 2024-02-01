@@ -13,13 +13,15 @@
 			Min = min;
 			Max = max;
 			Available = new List<int>(1 + Max - Min);
+			ResetBag();
 		}
 
 		public int GetRandom()
 		{
+			int ret = PullFromBag();
 			if (Available.Count <= 0)
 				ResetBag();
-			return PullFromBag();
+			return ret;
 		}
 
 		private readonly int PullFromBag()
