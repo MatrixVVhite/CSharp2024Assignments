@@ -134,9 +134,11 @@ namespace Berzerkers.Combat
 		private bool TryChangeWeather()
 		{
 			Dice changeWeatherDice = new(2, 6);
-			if (changeWeatherDice.Roll() > CurrentWeatherStrength)
+			int changeWeatherRoll = changeWeatherDice.Roll();
+			if (changeWeatherRoll > CurrentWeatherStrength)
 			{
 				CurrentWeatherEffect = GetRandomWeatherEffect();
+				CurrentWeatherStrength = changeWeatherRoll;
 				Console.WriteLine($"The weather has changed to {CurrentWeatherEffect}.");
 				return true;
 			}
