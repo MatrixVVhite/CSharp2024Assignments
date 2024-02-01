@@ -32,8 +32,8 @@
 		public readonly void ResetBag()
 		{
 			Available.Clear();
-			for (int i = 0; i <= Available.Count; ++i)
-				Available[i] = Min + i;
+			for (int i = 0; i <= Max; ++i)
+				Available.Add(Min + i);
 		}
 	}
 }
