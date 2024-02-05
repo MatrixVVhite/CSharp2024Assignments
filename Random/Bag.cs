@@ -12,7 +12,7 @@
 		{
 			Max = max;
 			Min = min;
-			Available = new List<int>(1 + Max - Min);
+			Available = new List<int>(Max - Min);
 			ResetBag();
 		}
 
@@ -34,7 +34,7 @@
 		public readonly void ResetBag()
 		{
 			Available.Clear();
-			for (int i = 0; i <= Max; ++i)
+			for (int i = 0; i < Max; ++i)
 				Available.Add(Min + i);
 		}
 	}

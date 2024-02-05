@@ -26,7 +26,7 @@ namespace Berzerkers.Combat
 			Teams = teams;
 			int unitsCount = Teams.Sum(t => t.UnitCount);
 			DeadUnits = new(unitsCount);
-			WeatherEffectsBag = new(0, Enum.GetValues<WeatherEffect>().Length-1);
+			WeatherEffectsBag = new(Enum.GetValues<WeatherEffect>().Length);
 		}
 
 		public CombatManager(params Team[] teams) : this(new List<Team>(teams)) { }
