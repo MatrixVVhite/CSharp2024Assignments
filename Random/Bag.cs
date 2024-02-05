@@ -8,10 +8,10 @@
 
 		private List<int> Available { get; set; }
 
-		public Bag(int min, int max)
+		public Bag(int max, int min = 0)
 		{
-			Min = min;
 			Max = max;
+			Min = min;
 			Available = new List<int>(1 + Max - Min);
 			ResetBag();
 		}
