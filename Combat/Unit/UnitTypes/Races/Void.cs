@@ -22,13 +22,23 @@ namespace Berzerkers.Combat.Unit.UnitTypes.Races.Void
 	public sealed class Bonewalker : Marauder
 	{
 		private Dice _damageOnDeath;
+		private Bag _onDefendBag;
+		private readonly List<Action<Unit>> _onDefend;
 
 		public Bonewalker(string name = "Bonewalker") : base(name, 13, new Dice(baseDie: 4), Race.Void)
 		{
 			_damageOnDeath = new(scalar: 2, baseDie: 3);
+			_onDefend = new()
+			{
+				u => Attack(u),
+				u => Heal(1),
+				u => _damageOnDeath = _damageOnDeath.AddModifier(1)
+			};
+			_onDefendBag = new(_onDefend.Count);
 		}
 
 		/// <summary>
+		/// When attacked, triggers a random effect.
 		/// On death, makes an attack for 2d3 damage.
 		/// </summary>
 		/// <param name="other"></param>
@@ -37,12 +47,18 @@ namespace Berzerkers.Combat.Unit.UnitTypes.Races.Void
 			if (!IsDead)
 			{
 				base.Defend(other);
+				DoOnDefend(other);
 				if (IsDead)
 				{
 					Damage = _damageOnDeath;
 					Attack(other);
 				}
 			}
+		}
+
+		private void DoOnDefend(Unit other)
+		{
+			_onDefend[_onDefendBag.GetRandom()](other);
 		}
 	}
 
