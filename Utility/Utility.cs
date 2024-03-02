@@ -1,4 +1,4 @@
-﻿static class Utility
+﻿public static class Utility
 {
 	public static void Swap<T>(ref T obj1, ref T obj2) => (obj2, obj1) = (obj1, obj2);
 
