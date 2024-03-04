@@ -22,9 +22,12 @@ namespace FormsApp
 			InitializeComponent();
 			_operations = new Dictionary<string, MathOperation>()
 			{
-				{ "Add", new MathOperation("+", (n1, n2) => n1 + n2) },
-				{ "Subtract", new MathOperation("-", (n1, n2) => n1 - n2) },
-				{ "Multiply", new MathOperation("x", (n1, n2) => n1 * n2) }
+				{ "Add",		new MathOperation("+", (n1, n2) => n1 + n2) },
+				{ "Subtract",	new MathOperation("-", (n1, n2) => n1 - n2) },
+				{ "Multiply",	new MathOperation("x", (n1, n2) => n1 * n2) },
+				{ "Division",	new MathOperation("/", (n1, n2) => n1 / n2) },
+				{ "Power",		new MathOperation("^", Math.Pow) },
+				{ "Modulo",		new MathOperation("%", (n1, n2) => n1 % n2) }
 			};
 			CurrentOperation = _operations.First().Value;
 		}
