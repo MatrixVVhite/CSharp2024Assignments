@@ -71,15 +71,11 @@
 			// OperationSelection
 			// 
 			this.OperationSelection.FormattingEnabled = true;
-			this.OperationSelection.Items.AddRange(new object[] {
-            "Add",
-            "Subtract",
-            "Multiply"});
 			this.OperationSelection.Location = new System.Drawing.Point(12, 38);
 			this.OperationSelection.Name = "OperationSelection";
 			this.OperationSelection.Size = new System.Drawing.Size(59, 21);
 			this.OperationSelection.TabIndex = 4;
-			this.OperationSelection.Text = "Add";
+			this.OperationSelection.Text = "Operation";
 			this.OperationSelection.SelectedIndexChanged += new System.EventHandler(this.OperationSelectedIndexChanged);
 			// 
 			// Calculate
