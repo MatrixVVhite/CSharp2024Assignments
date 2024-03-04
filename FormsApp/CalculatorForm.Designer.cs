@@ -70,19 +70,19 @@
 			// 
 			// OperationSelection
 			// 
+			this.OperationSelection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.OperationSelection.FormattingEnabled = true;
 			this.OperationSelection.Location = new System.Drawing.Point(12, 38);
 			this.OperationSelection.Name = "OperationSelection";
-			this.OperationSelection.Size = new System.Drawing.Size(59, 21);
+			this.OperationSelection.Size = new System.Drawing.Size(60, 21);
 			this.OperationSelection.TabIndex = 4;
-			this.OperationSelection.Text = "Operation";
 			this.OperationSelection.SelectedIndexChanged += new System.EventHandler(this.OperationSelectedIndexChanged);
 			// 
 			// Calculate
 			// 
-			this.Calculate.Location = new System.Drawing.Point(77, 38);
+			this.Calculate.Location = new System.Drawing.Point(78, 38);
 			this.Calculate.Name = "Calculate";
-			this.Calculate.Size = new System.Drawing.Size(59, 23);
+			this.Calculate.Size = new System.Drawing.Size(60, 21);
 			this.Calculate.TabIndex = 5;
 			this.Calculate.Text = "Calculate";
 			this.Calculate.UseVisualStyleBackColor = true;
