@@ -80,7 +80,7 @@
 			this.OperationSelection.Size = new System.Drawing.Size(59, 21);
 			this.OperationSelection.TabIndex = 4;
 			this.OperationSelection.Text = "Add";
-			this.OperationSelection.SelectedIndexChanged += new System.EventHandler(this.Operation_SelectedIndexChanged);
+			this.OperationSelection.SelectedIndexChanged += new System.EventHandler(this.OperationSelectedIndexChanged);
 			// 
 			// Calculate
 			// 
@@ -90,9 +90,9 @@
 			this.Calculate.TabIndex = 5;
 			this.Calculate.Text = "Calculate";
 			this.Calculate.UseVisualStyleBackColor = true;
-			this.Calculate.Click += new System.EventHandler(this.Calculate_Click);
+			this.Calculate.Click += new System.EventHandler(this.CalculateClick);
 			// 
-			// Form
+			// CalculatorForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -103,9 +103,9 @@
 			this.Controls.Add(this.OperationLabel);
 			this.Controls.Add(this.num2);
 			this.Controls.Add(this.num1);
-			this.Name = "Form";
+			this.Name = "CalculatorForm";
 			this.Text = "Exercise B - Forms";
-			this.Load += new System.EventHandler(this.Form_Load);
+			this.Load += new System.EventHandler(this.FormLoad);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

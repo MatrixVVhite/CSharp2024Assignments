@@ -17,17 +17,17 @@ namespace FormsApp
 			InitializeComponent();
 		}
 
-		private void Form_Load(object sender, EventArgs e)
+		private void FormLoad(object sender, EventArgs e)
 		{
 
 		}
 
-		private void Calculate_Click(object sender, EventArgs e)
+		private void OperationSelectedIndexChanged(object sender, EventArgs e)
 		{
 
 		}
 
-		private void Operation_SelectedIndexChanged(object sender, EventArgs e)
+		private void CalculateClick(object sender, EventArgs e)
 		{
 
 		}
