@@ -16,5 +16,20 @@ namespace FormsApp
 		{
 			InitializeComponent();
 		}
+
+		private void Form_Load(object sender, EventArgs e)
+		{
+
+		}
+
+		private void Calculate_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void Operation_SelectedIndexChanged(object sender, EventArgs e)
+		{
+
+		}
 	}
 }
