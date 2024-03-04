@@ -25,7 +25,7 @@ namespace FormsApp
 				{ "Add",		new MathOperation("+", (n1, n2) => n1 + n2) },
 				{ "Subtract",	new MathOperation("-", (n1, n2) => n1 - n2) },
 				{ "Multiply",	new MathOperation("x", (n1, n2) => n1 * n2) },
-				{ "Division",	new MathOperation("/", (n1, n2) => n1 / n2) },
+				{ "Divide",		new MathOperation("/", (n1, n2) => n1 / n2) },
 				{ "Power",		new MathOperation("^", Math.Pow) },
 				{ "Modulo",		new MathOperation("%", (n1, n2) => n1 % n2) }
 			};
