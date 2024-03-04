@@ -42,6 +42,7 @@
 			this.num1.Name = "num1";
 			this.num1.Size = new System.Drawing.Size(40, 20);
 			this.num1.TabIndex = 0;
+			this.num1.Text = "0";
 			// 
 			// num2
 			// 
@@ -49,6 +50,7 @@
 			this.num2.Name = "num2";
 			this.num2.Size = new System.Drawing.Size(40, 20);
 			this.num2.TabIndex = 1;
+			this.num2.Text = "0";
 			// 
 			// OperationLabel
 			// 
