@@ -1,6 +1,6 @@
 ﻿namespace FormsApp
 {
-	partial class Form
+	partial class CalculatorForm
 	{
 		/// <summary>
 		/// Required designer variable.

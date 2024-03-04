@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace FormsApp
 {
-	public partial class Form : System.Windows.Forms.Form
+	public partial class CalculatorForm : Form
 	{
-		public Form()
+		public CalculatorForm()
 		{
 			InitializeComponent();
 		}
