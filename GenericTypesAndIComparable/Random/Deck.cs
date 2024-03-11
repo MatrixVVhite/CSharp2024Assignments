@@ -26,7 +26,7 @@
 	public void Shuffle()
 	{
 		for (int i = 0; i < Remaining; i++)
-			Utility.Swap<T>(ref Active[i], ref Active[Random.Shared.Next(Remaining)]);
+			Swap(i, Random.Shared.Next(Remaining));
 	}
 
 	public void ReShuffle()
@@ -49,5 +49,13 @@
 		T drawn = Active.Last();
 		Active.RemoveAt(Remaining - 1);
 		return drawn;
+	}
+
+	private void Swap(int index1, int index2)
+	{
+		T t1 = Active[index1];
+		T t2 = Active[index2];
+		Active[index1] = t2;
+		Active[index2] = t1;
 	}
 }
