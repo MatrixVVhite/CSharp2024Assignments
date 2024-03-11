@@ -3,10 +3,10 @@
 	public int Scalar { get; init; }
 	public T[] BaseDie { get; init;}
 
-	public Dice(int scalar, T[] baseDie)
+	public Dice(int scalar, ICollection<T> baseDie)
 	{
 		Scalar = scalar;
-		BaseDie = baseDie;
+		BaseDie = baseDie.ToArray();
 	}
 
 	public virtual T[] Roll()

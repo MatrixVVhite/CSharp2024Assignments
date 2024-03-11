@@ -5,9 +5,9 @@
 	public int Size { get; private init; }
 	public int Remaining => Active.Count;
 
-	public Deck(T[] values)
+	public Deck(ICollection<T> values)
 	{
-		Size = values.Length;
+		Size = values.Count;
 		Active = values.ToList();
 		Discarded = new List<T>(Size);
 	}
