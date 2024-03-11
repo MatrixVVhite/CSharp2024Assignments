@@ -2,12 +2,11 @@
 {
 	private List<T> Active { get; set; }
 	private List<T> Discarded { get; set; }
-	public int Size { get; private init; }
+	public int Size => Active.Capacity;
 	public int Remaining => Active.Count;
 
 	public Deck(ICollection<T> values)
 	{
-		Size = values.Count;
 		Active = values.ToList();
 		Discarded = new List<T>(Size);
 	}
@@ -17,6 +16,7 @@
 		if (Remaining > 0)
 		{
 			drawn = Draw();
+			Discarded.Add(drawn);
 			return true;
 		}
 		drawn = default;
@@ -40,7 +40,7 @@
 	private void MoveDiscardedToActive()
 	{
 		foreach (var item in Discarded)
-			Active.Append(item);
+			Active.Add(item);
 		Discarded.Clear();
 	}
 
