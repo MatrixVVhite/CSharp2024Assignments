@@ -5,7 +5,7 @@
         public int Scalar { get; init; }
         public T[] BaseDie { get; init; }
 
-        public Dice(int scalar, ICollection<T> baseDie)
+        public Dice(int scalar, IEnumerable<T> baseDie)
         {
             Scalar = scalar;
             BaseDie = baseDie.ToArray();

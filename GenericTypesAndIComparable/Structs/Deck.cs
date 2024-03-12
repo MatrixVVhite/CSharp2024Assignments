@@ -7,7 +7,7 @@
         public int Size => Active.Capacity;
         public int Remaining => Active.Count;
 
-        public Deck(ICollection<T> values)
+        public Deck(IEnumerable<T> values)
         {
             Active = values.ToList();
             Discarded = new List<T>(Size);
