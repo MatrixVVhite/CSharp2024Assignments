@@ -2,6 +2,8 @@
 {
 	public static void Swap<T>(ref T obj1, ref T obj2) => (obj2, obj1) = (obj1, obj2);
 
+	public static void Swap<T>(IList<T> list, int idx1, int idx2) => (list[idx2], list[idx1]) = (list[idx1], list[idx2]);
+
 	public static float ClampMin(float val, float min) => Math.Max(val, min);
 
 	public static float ClampMax(float val, float max) => Math.Min(val, max);
@@ -31,6 +33,14 @@
 	}
 
 	public static Enum GetRandom(this Type t) => t.GetRandom(Random.Shared);
+
+	public static void Shuffle<T>(this IList<T> list)
+	{
+		if (list.IsReadOnly)
+			return;
+		for (int i = 0; i < list.Count; i++)
+			Swap(list, i, Random.Shared.Next(list.Count));
+	}
 
 	public static void BlockUntilKeyDown() => Console.ReadKey();
 }
