@@ -2,10 +2,17 @@
 //       Nehorai Buader
 // ----------------------------
 // Assignment 10 - LINQ (H.A.)
-public class Program
-{
-	public static void Main()
-	{
 
+namespace LINQ
+{
+	public static class Program
+	{
+		public static void Main()
+		{
+			UsingQueryOperations.WorkInClass1();
+			UsingQueryOperations.WorkInClass2();
+			UsingQueryOperations.WorkInClass3();
+			UsingQueryOperations.WorkInClass4();
+		}
 	}
 }
