@@ -4,7 +4,7 @@
     {
         public short Modifier { get; init; }
 
-        public Dice(byte scalar = 1, byte baseDie = 6, short modifier = 0) : base(scalar, Enumerable.Range(1, baseDie).ToArray())
+        public Dice(byte scalar = 1, byte baseDie = 6, short modifier = 0) : base(scalar, Enumerable.Range(1, baseDie))
         {
             Modifier = modifier;
         }
