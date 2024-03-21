@@ -13,6 +13,7 @@ namespace LINQ
 			UsingQueryOperations.WorkInClass2();
 			UsingQueryOperations.WorkInClass3();
 			UsingQueryOperations.WorkInClass4();
+			ExtendingQueryOperations.PrintStrongestUnit();
 		}
 	}
 }
