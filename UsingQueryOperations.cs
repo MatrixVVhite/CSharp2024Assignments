@@ -40,12 +40,6 @@
 			students.Join(grades, s => s.id, g => g.id, (s, g) => new { s.firstName, g.grade }).Print();
 		}
 
-		private static void Print<T>(this IEnumerable<T> collection)
-		{
-			foreach (var e in collection)
-				Console.WriteLine(e);
-		}
-
 		private class Student
 		{
 			public string firstName;
