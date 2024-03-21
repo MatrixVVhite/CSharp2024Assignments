@@ -1,13 +1,26 @@
-﻿namespace LINQ
+﻿using System;
+using static System.Net.Mime.MediaTypeNames;
+using System.ComponentModel;
+
+namespace LINQ
 {
 	public static class ExtendingQueryOperations
 	{
+		/// <summary>
+		/// Write an extension method for IEnumerables that prints all items in the collection to the console.
+		/// </summary>
+		/// <typeparam name="T">Type of IEnumerable</typeparam>
+		/// <param name="collection">Collection whose elements to print</param>
 		public static void Print<T>(this IEnumerable<T> collection)
 		{
 			foreach (var e in collection)
 				Console.WriteLine(e);
 		}
 
+		/// <summary>
+		/// Write an extension method for IEnumerables<T> that returns a T object according to an IComparable comparison on a class member inside T.
+		/// For example, in an enemy with a Damage : int component (int is IComparable) could be used to get the enemy with the highest damage in a collection.
+		/// </summary>
 		public static void PrintStrongestUnit()
 		{
 			uint levelUpsCount = 39;
