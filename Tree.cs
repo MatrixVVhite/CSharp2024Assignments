@@ -121,7 +121,7 @@ namespace TheTreeDataStructure
 				if (currentNode.IsLeaf)
 					return;
 				foreach (Node child in currentNode.children!)
-					Tree<T>.Enumerator.GetNodesWithDepth(child, ref nodes, currentDepth++);
+					Tree<T>.Enumerator.GetNodesWithDepth(child, ref nodes, currentDepth+1);
 			}
 		}
 		#endregion
