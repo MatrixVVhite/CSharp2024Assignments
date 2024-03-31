@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 
 namespace TheTreeDataStructure
 {
@@ -24,19 +25,19 @@ namespace TheTreeDataStructure
 
 			public readonly bool IsLeaf => !HasChildren;
 
-			public Node (T value)
+			public Node ([DisallowNull] T value)
 			{
 				this.value = value;
 				children = null;
 			}
 
-			public Node(T value, params T[] children)
+			public Node([DisallowNull] T value, params T[] children)
 			{
 				this.value = value;
 				this.children = children.Select((t, _) => new Node(t)).ToList();
 			}
 
-			public Node(T value, params Node[] children)
+			public Node([DisallowNull] T value, params Node[] children)
 			{
 				this.value = value;
 				this.children = children.ToList();
@@ -48,10 +49,12 @@ namespace TheTreeDataStructure
 				children.Add(node);
 			}
 
-			public void AddChild(T val)
+			public void AddChild([DisallowNull] T val)
 			{
 				AddChild(new Node(val));
 			}
+
+			public override string ToString() => value.ToString();
 		}
 		#endregion
 
