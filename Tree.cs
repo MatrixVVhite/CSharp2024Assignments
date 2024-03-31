@@ -5,6 +5,7 @@ namespace TheTreeDataStructure
 	public class Tree<T> : IEnumerable<T>
 	{
 		public Node root;
+		public bool enumerateBreadthFirst = false;
 
 		public Tree(T val) : this(new Node(val)) { }
 
@@ -35,25 +36,29 @@ namespace TheTreeDataStructure
 				this.children = children.Select((t, _) => new Node(t)).ToList();
 			}
 
-			public void AddChild(T val)
+			public Node(T value, params Node[] children)
+			{
+				this.value = value;
+				this.children = children.ToList();
+			}
+
+			public void AddChild(Node node)
 			{
 				children ??= new(1);
-				children.Add(new(val));
+				children.Add(node);
+			}
+
+			public void AddChild(T val)
+			{
+				AddChild(new Node(val));
 			}
 		}
 		#endregion
 
 		#region ENUMERATION
-		/// <summary>
-		/// Returns an enumerator for this tree.
-		/// </summary>
-		/// <param name="depthFirst">Determines if the enumeration goes depth-first or breadth-first.</param>
-		/// <returns>An enumerator for this tree.</returns>
-		public Enumerator GetTreeEnumerator(bool depthFirst = false) => new(this, depthFirst);
+		public IEnumerator<T> GetEnumerator() => new Enumerator(this, enumerateBreadthFirst);
 
-		public IEnumerator<T> GetEnumerator() => GetTreeEnumerator();
-
-		IEnumerator IEnumerable.GetEnumerator() => GetTreeEnumerator();
+		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
 		public class Enumerator : IEnumerator<T>
 		{
@@ -63,10 +68,10 @@ namespace TheTreeDataStructure
 			public T Current => _values[_index];
 			object IEnumerator.Current => Current;
 
-			public Enumerator(Tree<T> tree, bool depthFirst)
+			public Enumerator(Tree<T> tree, bool breadthFirst)
 			{
 				_values = new(1);
-				SetNodes(tree.root, depthFirst);
+				SetNodes(tree.root, breadthFirst);
 				_index = 0;
 			}
 
@@ -83,12 +88,12 @@ namespace TheTreeDataStructure
 				_index = 0;
 			}
 
-			private void SetNodes(Node node, bool depthFirst)
+			private void SetNodes(Node node, bool breadthFirst)
 			{
-				if (depthFirst)
-					SetNodesDepthFirst(node);
-				else
+				if (breadthFirst)
 					SetNodesBreadthFirst(node);
+				else
+					SetNodesDepthFirst(node);
 			}
 
 			private void SetNodesDepthFirst(Node node)
