@@ -75,7 +75,7 @@ namespace TheTreeDataStructure
 			{
 				_values = new(1);
 				SetNodes(tree.root, breadthFirst);
-				_index = 0;
+				_index = -1;
 			}
 
 			public void Dispose() { }
@@ -88,7 +88,7 @@ namespace TheTreeDataStructure
 
 			public void Reset()
 			{
-				_index = 0;
+				_index = -1;
 			}
 
 			private void SetNodes(Node node, bool breadthFirst)
