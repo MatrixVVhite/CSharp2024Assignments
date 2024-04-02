@@ -1,8 +1,4 @@
-﻿using System;
-using static System.Net.Mime.MediaTypeNames;
-using System.ComponentModel;
-
-namespace LINQ
+﻿namespace LINQ
 {
 	public static class ExtendingQueryOperations
 	{
