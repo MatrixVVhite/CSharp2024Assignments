@@ -1,9 +1,10 @@
 ﻿
-public class Unit
+public class Unit : IPrintable
 {
 	public string Name { get; protected set; }
 	public uint Level { get; protected set; }
 	public UnitStats Stats { get; protected set; }
+	public Weapon Weapon { get; set; }
 
 	public Unit(string name, uint level, UnitStats stats)
 	{
@@ -20,6 +21,11 @@ public class Unit
 	}
 
 	public override string ToString() => $"{Name} Lv{Level}";
+
+	public string Print()
+	{
+		return ToString();
+	}
 
 	public struct UnitStats : IComparable<UnitStats>
 	{
@@ -78,17 +84,17 @@ public class Unit
 	public struct Stat : IComparable<Stat>
 	{
 		public uint Value { get; private set; }
-		public float Growth { get; private init; }
+		public float GrowthRate { get; private init; }
 
 		public Stat(uint baseStat = 1, float growthRate = 0.5f)
 		{
 			Value = baseStat;
-			Growth = ClampRange(growthRate, 0f, 1f);
+			GrowthRate = ClampRange(growthRate, 0f, 1f);
 		}
 
 		public bool TryGrow()
 		{
-			if (RollChance(Growth))
+			if (RollChance(GrowthRate))
 			{
 				Value++;
 				return true;
