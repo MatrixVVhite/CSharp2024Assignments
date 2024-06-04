@@ -99,5 +99,7 @@ public class Unit
 		private static float ClampRange(float val, float min, float max) => Math.Max(Math.Min(val, max), min);
 
 		private static bool RollChance(float chanceToSucceed) => chanceToSucceed > Random.Shared.NextDouble();
+
+		public int CompareTo(Stat other) => Value.CompareTo(other.Value);
 	}
 }
