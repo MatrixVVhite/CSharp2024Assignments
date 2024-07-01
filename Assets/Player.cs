@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 	[SerializeField] private Rigidbody2D _rb;
 	[SerializeField] private Collider2D _collider;
 	[SerializeField] private Actions _actions;
+	[SerializeField] private float _jumpMultiplier = 5;
 	private event UnityAction OnCollisionEnter2DAction;
 	private StateMachine _stateMachine;
 
@@ -35,7 +36,17 @@ public class Player : MonoBehaviour
 		OnCollisionEnter2DAction += () => _stateMachine.TriggerTransition(jumpingState, standbyState);
 	}
 
-	private void OnCollisionEnter2D(Collision2D collision)
+    private void OnEnable()
+    {
+        _actions.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _actions.Disable();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
 	{
 		OnCollisionEnter2DAction?.Invoke();
 	}
@@ -55,6 +66,8 @@ public class Player : MonoBehaviour
 		}
 
 		public abstract void Update();
+
+		public abstract void OnEnter();
 	}
 
 	public class StandbyState : PlayerState
@@ -65,7 +78,10 @@ public class Player : MonoBehaviour
 
 		public override void Update()
 		{ }
-	}
+
+        public override void OnEnter()
+		{ }
+    }
 
 	public class MovingState : PlayerState
 	{
@@ -76,7 +92,10 @@ public class Player : MonoBehaviour
 		{
 			player._rb.velocityX = player._actions.Player.Move.ReadValue<Vector2>().x;
 		}
-	}
+
+        public override void OnEnter()
+        { }
+    }
 
 	public class JumpingState : PlayerState
 	{
@@ -84,10 +103,13 @@ public class Player : MonoBehaviour
 		{ }
 
 		public override void Update()
-		{
-			player._rb.velocityX = player._actions.Player.Move.ReadValue<Vector2>().x;
-		}
-	}
+		{ }
+
+        public override void OnEnter()
+        {
+			player._rb.AddForce(Vector2.up * player._jumpMultiplier, ForceMode2D.Impulse);
+        }
+    }
 
 	public class DuckingState : PlayerState
 	{
@@ -96,8 +118,11 @@ public class Player : MonoBehaviour
 
 		public override void Update()
 		{
-			player._rb.velocityX = player._actions.Player.Move.ReadValue<Vector2>().x * 0.5f;
+			player._rb.velocityX = player._actions.Player.Move.ReadValue<Vector2>().x * 0.3f;
 		}
-	}
+
+        public override void OnEnter()
+        { }
+    }
 	#endregion
 }
