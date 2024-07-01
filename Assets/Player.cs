@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 	[SerializeField] private Rigidbody2D _rb;
 	[SerializeField] private Collider2D _collider;
 	[SerializeField] private Actions _actions;
+	[SerializeField] private float _speedMultiplier = 1;
 	[SerializeField] private float _jumpMultiplier = 5;
 	private event UnityAction OnCollisionEnter2DAction;
 	private StateMachine _stateMachine;
@@ -90,7 +91,7 @@ public class Player : MonoBehaviour
 
 		public override void Update()
 		{
-			player._rb.velocityX = player._actions.Player.Move.ReadValue<Vector2>().x;
+			player._rb.velocityX = player._actions.Player.Move.ReadValue<Vector2>().x * player._speedMultiplier;
 		}
 
         public override void OnEnter()
@@ -118,7 +119,7 @@ public class Player : MonoBehaviour
 
 		public override void Update()
 		{
-			player._rb.velocityX = player._actions.Player.Move.ReadValue<Vector2>().x * 0.3f;
+			player._rb.velocityX = player._actions.Player.Move.ReadValue<Vector2>().x * 0.3f * player._speedMultiplier;
 		}
 
         public override void OnEnter()
