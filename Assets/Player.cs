@@ -69,6 +69,8 @@ public class Player : MonoBehaviour
 		public abstract void Update();
 
 		public abstract void OnEnter();
+
+		public abstract void OnExit();
 	}
 
 	public class StandbyState : PlayerState
@@ -82,6 +84,9 @@ public class Player : MonoBehaviour
 
         public override void OnEnter()
 		{ }
+
+        public override void OnExit()
+        { }
     }
 
 	public class MovingState : PlayerState
@@ -95,6 +100,9 @@ public class Player : MonoBehaviour
 		}
 
         public override void OnEnter()
+        { }
+
+        public override void OnExit()
         { }
     }
 
@@ -110,6 +118,9 @@ public class Player : MonoBehaviour
         {
 			player._rb.AddForce(Vector2.up * player._jumpMultiplier, ForceMode2D.Impulse);
         }
+
+        public override void OnExit()
+        { }
     }
 
 	public class DuckingState : PlayerState
@@ -123,7 +134,14 @@ public class Player : MonoBehaviour
 		}
 
         public override void OnEnter()
-        { }
+        {
+			player.gameObject.transform.localScale = new Vector3(1, 0.5f, 1);
+		}
+
+        public override void OnExit()
+        {
+            player.gameObject.transform.localScale = Vector3.one;
+        }
     }
 	#endregion
 }

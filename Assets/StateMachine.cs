@@ -13,6 +13,7 @@ public class StateMachine : IState
 	private IState CurrentState 
 	{ set 
 		{ 
+			_currentState.state?.OnExit();
 			_currentState = _states.Single(s => s.state == value);
 			_currentState.state.OnEnter();
 			UnityEngine.Debug.Log(value); 
@@ -69,6 +70,11 @@ public class StateMachine : IState
 		_currentState.state.OnEnter();
     }
 
+    public void OnExit()
+    {
+        _currentState.state.OnExit();
+    }
+
     private struct Transition : IEquatable<Transition>
 	{
 		public static Transition Empty = new();
@@ -123,4 +129,6 @@ public interface IState
 	public abstract void Update();
 
 	public abstract void OnEnter();
+
+	public abstract void OnExit();
 }
